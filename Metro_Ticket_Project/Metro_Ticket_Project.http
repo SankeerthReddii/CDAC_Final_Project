@@ -1,0 +1,6 @@
+@Metro_Ticket_Project_HostAddress = http://localhost:5025
+
+GET {{Metro_Ticket_Project_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
