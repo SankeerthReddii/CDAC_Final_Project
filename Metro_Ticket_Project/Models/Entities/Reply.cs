@@ -6,6 +6,8 @@ namespace Metro_Ticket_Project.Models.Entities
     [Table("replies")]
     public class Reply : BaseEntity
     {
+        internal DateTime ReplyDate;
+
         [Required]
         [Column("complaint_id")]
         public int ComplaintId { get; set; }

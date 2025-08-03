@@ -43,7 +43,7 @@ namespace Metro_Ticket_Project.Controllers
         {
             var data = new AdminDataResponse
             {
-                PendingComplaints = await _complaintService.GetAllPendingComplaintsAsync(),
+                GetAllPendingComplaintsAsync = await _complaintService.GetAllPendingComplaintsAsync(),
                 TotalCards = await _metroCardService.GetAllApprovedCardsAsync(),
                 TotalComplaints = await _complaintService.GetAllComplaintsAsync(),
                 TotalPendingCards = await _metroCardService.GetAllPendingCardRequestAsync(),

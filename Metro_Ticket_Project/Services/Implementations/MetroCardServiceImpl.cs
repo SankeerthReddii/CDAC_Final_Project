@@ -35,7 +35,7 @@ namespace Metro_Ticket_Project.Services.Implementations
                 ICard = null, // Identity card image
                 Balance = 0,
                 CardNo = "",
-                ICardNo = request.ICardNo,
+                ICardNo = request.ICard,
                 Pin = request.Pin,
                 User = user
             };

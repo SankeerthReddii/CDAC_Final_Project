@@ -7,7 +7,7 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class TripDetailsRepository : BaseRepository<TripDetails>, ITripDetailsRepository
     {
-        public TripDetailsRepository(MetroTicketDbContext context) : base(context) { }
+        public TripDetailsRepository(MetroDbContext context) : base(context) { }
 
         public async Task<IEnumerable<TripDetails>> GetScheduleByIdAsync(int stationId)
         {

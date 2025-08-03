@@ -9,7 +9,7 @@ namespace Metro_Ticket_Project.Models.DTOs.Card
 
         [Required(ErrorMessage = "ID card number is required")]
         [StringLength(20)]
-        public string ICardNo { get; set; } = string.Empty;
+        public string ICard { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "PIN is required")]
         [Range(1000, 9999, ErrorMessage = "PIN must be 4 digits")]

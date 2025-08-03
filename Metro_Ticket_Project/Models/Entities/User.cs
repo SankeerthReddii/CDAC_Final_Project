@@ -28,5 +28,8 @@ namespace Metro_Ticket_Project.Models.Entities
         [StringLength(500)]
         [Column("address")]
         public string? Address { get; set; }
+        public bool Card { get; internal set; }
+        public DateTime DateOfBirth { get; internal set; }
+        public string Gender { get; internal set; }
     }
 }

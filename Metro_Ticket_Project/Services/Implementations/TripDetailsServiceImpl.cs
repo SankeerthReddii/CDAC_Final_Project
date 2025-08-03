@@ -37,8 +37,8 @@ namespace Metro_Ticket_Project.Services.Implementations
                             TrainNo = trip.Train?.Id ?? 0,
                             TripNo = tripDetail.TripNo,
                             Towards = towardsStation ?? "Unknown",
-                            ArrivalTime = tripDetail.ArrivalTime.ToString("HH:mm"),
-                            DepartureTime = tripDetail.DepartureTime.ToString("HH:mm")
+                            ArrivalTime = tripDetail.ArrivalTime.ToString(),
+                            DepartureTime = tripDetail.DepartureTime.ToString()
                         };
 
                         response.Add(scheduleItem);

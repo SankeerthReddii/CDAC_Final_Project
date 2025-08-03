@@ -12,14 +12,14 @@ namespace Metro_Ticket_Project.Services.Repositories
         public async Task<decimal> GetFareAmountAsync(int source, int destination)
         {
             var fare = await _dbSet
-                .FirstOrDefaultAsync(f => f.Source == source && f.Destination == destination);
+                .FirstOrDefaultAsync(f => f.FromStationId == source && f.ToStationId == destination);
             return fare?.Amount ?? 0;
         }
 
         public async Task<IEnumerable<Fare>> GetFareFromStationAsync(int source)
         {
             return await _dbSet
-                .Where(f => f.Source == source)
+                .Where(f => f.FromStationId == source)
                 .ToListAsync();
         }
     }

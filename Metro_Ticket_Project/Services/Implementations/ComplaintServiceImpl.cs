@@ -81,7 +81,7 @@ namespace Metro_Ticket_Project.Services.Implementations
                 {
                     ComplaintId = id,
                     Complaint = complaint,
-                    ReplyText = msgString.ReplyMessage,
+                    ReplyText = msgString.MessageString,
                     ReplyDate = DateTime.Now,
                     RepliedBy = "Admin"
                 };
@@ -89,7 +89,7 @@ namespace Metro_Ticket_Project.Services.Implementations
                 await _complaintRepository.AddReplyAsync(reply);
 
                 complaint.Status = "Resolved";
-                complaint.Response = msgString.ReplyMessage;
+                complaint.Response = msgString.MessageString;
                 complaint.DateTime = DateTime.Now;
 
                 await _complaintRepository.UpdateComplaintAsync(complaint);
