@@ -7,7 +7,7 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class FareRepository : BaseRepository<Fare>, IFareRepository
     {
-        public FareRepository(MetroTicketDbContext context) : base(context) { }
+        public FareRepository(MetroDbContext context) : base(context) { }
 
         public async Task<decimal> GetFareAmountAsync(int source, int destination)
         {

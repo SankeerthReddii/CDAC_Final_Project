@@ -8,5 +8,11 @@ namespace Metro_Ticket_Project.Models.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        [Column("created_date")]
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+        [Column("updated_date")]
+        public DateTime UpdatedDate { get; set; } = DateTime.Now;
     }
 }

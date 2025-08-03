@@ -7,7 +7,7 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(MetroTicketDbContext context) : base(context) { }
+        public UserRepository(MetroDbContext context) : base(context) { }
 
         public async Task<User?> FindByEmailAndPasswordAsync(string email, string password)
         {

@@ -7,7 +7,7 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class AdminRepository : BaseRepository<Admin>, IAdminRepository
     {
-        public AdminRepository(MetroTicketDbContext context) : base(context) { }
+        public AdminRepository(MetroDbContext context) : base(context) { }
 
         public async Task<Admin?> FindByEmailAndPasswordAsync(string email, string password)
         {

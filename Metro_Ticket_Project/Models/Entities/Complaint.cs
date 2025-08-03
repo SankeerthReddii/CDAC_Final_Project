@@ -10,6 +10,24 @@ namespace Metro_Ticket_Project.Models.Entities
         public int UserId { get; set; }
 
         [Required]
+        [StringLength(200)]
+        [Column("subject")]
+        public string Subject { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(1000)]
+        [Column("description")]
+        public string Description { get; set; } = string.Empty;
+
+        [StringLength(20)]
+        [Column("status")]
+        public string Status { get; set; } = "Pending";
+
+        [StringLength(10)]
+        [Column("priority")]
+        public string Priority { get; set; } = "Medium";
+
+        [Required]
         [StringLength(20)]
         [Column("u_name", TypeName = "varchar(20)")]
         public string Name { get; set; } = string.Empty;
@@ -34,10 +52,6 @@ namespace Metro_Ticket_Project.Models.Entities
         [Column(TypeName = "varchar(30)")]
         public string? Email { get; set; }
 
-        [StringLength(20)]
-        [Column("status", TypeName = "varchar(20)")]
-        public string? Status { get; set; }
-
         [Column("date_time")]
         public DateTime DateTime { get; set; } = DateTime.Now;
 
@@ -45,7 +59,8 @@ namespace Metro_Ticket_Project.Models.Entities
         [Column(TypeName = "varchar(200)")]
         public string? Response { get; set; }
 
-        // Navigation property
+        // Navigation properties
+        public virtual User User { get; set; } = null!;
         public virtual ICollection<Reply> Replies { get; set; } = new List<Reply>();
     }
 }

@@ -7,7 +7,7 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class HistoryRepository : BaseRepository<History>, IHistoryRepository
     {
-        public HistoryRepository(MetroTicketDbContext context) : base(context) { }
+        public HistoryRepository(MetroDbContext context) : base(context) { }
 
         public async Task<IEnumerable<History>> FindByEmailAsync(string email)
         {

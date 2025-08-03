@@ -3,23 +3,40 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Metro_Ticket_Project.Models.Entities
 {
-    [Table("trip")]
+    [Table("trips")]
     public class Trip : BaseEntity
     {
+        [Required]
+        [StringLength(20)]
+        [Column("trip_code")]
+        public string TripCode { get; set; } = string.Empty;
+
         [Required]
         [Column("route_id")]
         public int RouteId { get; set; }
 
         [Required]
-        [ForeignKey("Train")]
+        [Column("train_id")]
         public int TrainId { get; set; }
 
         [Required]
-        [Column(TypeName = "varchar(50)")]
+        [Column("departure_time")]
+        public DateTime DepartureTime { get; set; }
+
+        [Required]
+        [Column("arrival_time")]
+        public DateTime ArrivalTime { get; set; }
+
+        [StringLength(20)]
+        [Column("status")]
+        public string Status { get; set; } = "Scheduled";
+
+        [Required]
+        [Column("start", TypeName = "varchar(50)")]
         public string Start { get; set; } = string.Empty;
 
         [Required]
-        [Column(TypeName = "varchar(50)")]
+        [Column("end", TypeName = "varchar(50)")]
         public string End { get; set; } = string.Empty;
 
         // Navigation properties

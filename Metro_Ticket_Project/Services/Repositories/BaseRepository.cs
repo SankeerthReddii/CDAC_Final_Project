@@ -7,10 +7,10 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        protected readonly MetroTicketDbContext _context;
+        protected readonly MetroDbContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        public BaseRepository(MetroTicketDbContext context)
+        public BaseRepository(MetroDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();

@@ -15,8 +15,11 @@ namespace Metro_Ticket_Project.Models.Entities
         public int StationId { get; set; }
 
         [Required]
-        [Column("s_order_num")]
-        public int OrderNum { get; set; }
+        [Column("station_order")]
+        public int StationOrder { get; set; }
+
+        [Column("distance_from_previous", TypeName = "decimal(6,2)")]
+        public decimal? DistanceFromPrevious { get; set; }
 
         // Navigation properties
         public virtual Route Route { get; set; } = null!;

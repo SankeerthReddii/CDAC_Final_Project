@@ -3,23 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Metro_Ticket_Project.Models.Entities
 {
-    [Table("station")]
+    [Table("stations")]
     public class Station : BaseEntity
     {
-        internal String? Code { get; set; }
-        internal String? Location { get; set; }
-
         [Required]
-        [StringLength(30)]
-        [Column("s_name", TypeName = "varchar(30)")]
+        [StringLength(100)]
+        [Column("name")]
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        [Column(TypeName = "decimal(10,8)")]
-        public decimal Latitude { get; set; }
+        [StringLength(10)]
+        [Column("code")]
+        public string Code { get; set; } = string.Empty;
 
-        [Required]
-        [Column(TypeName = "decimal(11,8)")]
-        public decimal Longitude { get; set; }
+        [StringLength(200)]
+        [Column("location")]
+        public string? Location { get; set; }
     }
 }

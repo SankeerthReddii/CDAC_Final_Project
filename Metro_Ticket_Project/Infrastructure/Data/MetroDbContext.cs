@@ -1,5 +1,4 @@
-﻿// Infrastructure/Data/MetroDbContext.cs
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Metro_Ticket_Project.Models.Entities;
 using Route = Metro_Ticket_Project.Models.Entities.Route;
 
@@ -41,9 +40,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                 entity.Property(e => e.Phone).HasMaxLength(15);
                 entity.Property(e => e.Address).HasMaxLength(500);
                 entity.HasIndex(e => e.Email).IsUnique();
-
-                // Table name
-                entity.ToTable("Users");
             });
 
             // Configure Admin entity
@@ -54,8 +50,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                 entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
                 entity.Property(e => e.Password).IsRequired().HasMaxLength(255);
                 entity.HasIndex(e => e.Email).IsUnique();
-
-                entity.ToTable("Admins");
             });
 
             // Configure MetroCard entity
@@ -72,8 +66,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                       .WithMany()
                       .HasForeignKey(e => e.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
-
-                entity.ToTable("MetroCards");
             });
 
             // Configure Station entity
@@ -84,8 +76,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                 entity.Property(e => e.Code).IsRequired().HasMaxLength(10);
                 entity.Property(e => e.Location).HasMaxLength(200);
                 entity.HasIndex(e => e.Code).IsUnique();
-
-                entity.ToTable("Stations");
             });
 
             // Configure Fare entity
@@ -96,20 +86,18 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                 entity.Property(e => e.Distance).HasColumnType("decimal(6,2)");
 
                 // Foreign keys to Stations
-                entity.HasOne(e => e.FromStation)
+                entity.HasOne(e => e.Source)
                       .WithMany()
                       .HasForeignKey(e => e.FromStationId)
                       .OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasOne(e => e.ToStation)
+                entity.HasOne(e => e.Destination)
                       .WithMany()
                       .HasForeignKey(e => e.ToStationId)
                       .OnDelete(DeleteBehavior.Restrict);
 
                 // Unique constraint for route combination
                 entity.HasIndex(e => new { e.FromStationId, e.ToStationId }).IsUnique();
-
-                entity.ToTable("Fares");
             });
 
             // Configure Route entity
@@ -120,8 +108,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                 entity.Property(e => e.RouteCode).IsRequired().HasMaxLength(10);
                 entity.Property(e => e.TotalDistance).HasColumnType("decimal(8,2)");
                 entity.HasIndex(e => e.RouteCode).IsUnique();
-
-                entity.ToTable("Routes");
             });
 
             // Configure RouteDetails entity
@@ -144,8 +130,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
 
                 // Unique constraint for route and station order
                 entity.HasIndex(e => new { e.RouteId, e.StationOrder }).IsUnique();
-
-                entity.ToTable("RouteDetails");
             });
 
             // Configure Train entity
@@ -157,8 +141,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                 entity.Property(e => e.Capacity).HasDefaultValue(300);
                 entity.Property(e => e.Status).HasMaxLength(20).HasDefaultValue("Active");
                 entity.HasIndex(e => e.TrainNumber).IsUnique();
-
-                entity.ToTable("Trains");
             });
 
             // Configure Trip entity
@@ -180,8 +162,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                       .WithMany()
                       .HasForeignKey(e => e.RouteId)
                       .OnDelete(DeleteBehavior.Restrict);
-
-                entity.ToTable("Trips");
             });
 
             // Configure TripDetails entity
@@ -202,8 +182,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                       .WithMany()
                       .HasForeignKey(e => e.StationId)
                       .OnDelete(DeleteBehavior.Restrict);
-
-                entity.ToTable("TripDetails");
             });
 
             // Configure Complaint entity
@@ -220,8 +198,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                       .WithMany()
                       .HasForeignKey(e => e.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
-
-                entity.ToTable("Complaints");
             });
 
             // Configure Reply entity
@@ -237,7 +213,11 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                       .HasForeignKey(e => e.ComplaintId)
                       .OnDelete(DeleteBehavior.Cascade);
 
-                entity.ToTable("Replies");
+                // Foreign key to Admin
+                entity.HasOne(e => e.Admin)
+                      .WithMany()
+                      .HasForeignKey(e => e.AdminId)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure BookingHistory entity
@@ -265,11 +245,9 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                       .WithMany()
                       .HasForeignKey(e => e.ToStationId)
                       .OnDelete(DeleteBehavior.Restrict);
-
-                entity.ToTable("BookingHistories");
             });
 
-            // Configure History entity (for general transaction history)
+            // Configure History entity
             modelBuilder.Entity<History>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -289,8 +267,6 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                       .WithMany()
                       .HasForeignKey(e => e.MetroCardId)
                       .OnDelete(DeleteBehavior.SetNull);
-
-                entity.ToTable("Histories");
             });
 
             // Configure indexes for better performance
@@ -320,7 +296,10 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                 {
                     if (property.ClrType == typeof(decimal) || property.ClrType == typeof(decimal?))
                     {
-                        property.SetColumnType("decimal(18,2)");
+                        if (property.GetColumnType() == null) // Only set if not already configured
+                        {
+                            property.SetColumnType("decimal(18,2)");
+                        }
                     }
                 }
             }
@@ -381,3 +360,4 @@ namespace Metro_Ticket_Project.Infrastructure.Data
         }
     }
 }
+

@@ -3,12 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Metro_Ticket_Project.Models.Entities
 {
-    [Table("reply")]
+    [Table("replies")]
     public class Reply : BaseEntity
     {
         [Required]
         [Column("complaint_id")]
         public int ComplaintId { get; set; }
+
+        [Required]
+        [StringLength(1000)]
+        [Column("reply_text")]
+        public string ReplyText { get; set; } = string.Empty;
+
+        [StringLength(100)]
+        [Column("replied_by")]
+        public string? RepliedBy { get; set; }
 
         [Required]
         [StringLength(200)]

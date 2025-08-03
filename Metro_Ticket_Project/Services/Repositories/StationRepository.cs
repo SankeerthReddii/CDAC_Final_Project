@@ -7,7 +7,7 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class StationRepository : BaseRepository<Station>, IStationRepository
     {
-        public StationRepository(MetroTicketDbContext context) : base(context) { }
+        public StationRepository(MetroDbContext context) : base(context) { }
 
         public async Task<int> GetStationIdAsync(string name)
         {

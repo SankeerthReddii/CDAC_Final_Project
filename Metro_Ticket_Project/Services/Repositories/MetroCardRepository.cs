@@ -7,7 +7,7 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class MetroCardRepository : BaseRepository<MetroCard>, IMetroCardRepository
     {
-        public MetroCardRepository(MetroTicketDbContext context) : base(context) { }
+        public MetroCardRepository(MetroDbContext context) : base(context) { }
 
         public async Task<MetroCard?> FindByCardNoAndPinAsync(string cardNo, int pin)
         {
@@ -45,6 +45,11 @@ namespace Metro_Ticket_Project.Services.Repositories
         {
             return await _dbSet
                 .CountAsync(c => c.CardStatus == false);
+        }
+
+        public Task SaveAsync(MetroCard card)
+        {
+            throw new NotImplementedException();
         }
     }
 }

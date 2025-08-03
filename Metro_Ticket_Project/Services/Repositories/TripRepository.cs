@@ -7,7 +7,7 @@ namespace Metro_Ticket_Project.Services.Repositories
 {
     public class TripRepository : BaseRepository<Trip>, ITripRepository
     {
-        public TripRepository(MetroTicketDbContext context) : base(context) { }
+        public TripRepository(MetroDbContext context) : base(context) { }
 
         public async Task<Trip?> GetTrainNoByTripIdAsync(int tripId)
         {

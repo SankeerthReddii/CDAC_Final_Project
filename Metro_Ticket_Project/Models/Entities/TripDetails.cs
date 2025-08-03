@@ -12,19 +12,29 @@ namespace Metro_Ticket_Project.Models.Entities
 
         [Required]
         [Column("trip_id")]
-        public int TripNo { get; set; }
+        public int TripId { get; set; }
 
         [Required]
         [Column("station_id")]
         public int StationId { get; set; }
 
         [Required]
-        [Column("arrival_time")]
-        public DateTime ArrivalTime { get; set; }
+        [Column("station_order")]
+        public int StationOrder { get; set; }
 
-        [Required]
+        [Column("arrival_time")]
+        public DateTime? ArrivalTime { get; set; }
+
         [Column("departure_time")]
-        public DateTime DepartureTime { get; set; }
+        public DateTime? DepartureTime { get; set; }
+
+        // Keep the original TripNo property for backward compatibility if needed
+        [NotMapped]
+        public int TripNo
+        {
+            get => TripId;
+            set => TripId = value;
+        }
 
         // Navigation properties
         public virtual Trip Trip { get; set; } = null!;
