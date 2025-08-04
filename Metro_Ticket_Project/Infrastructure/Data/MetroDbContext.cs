@@ -40,7 +40,15 @@ namespace Metro_Ticket_Project.Infrastructure.Data
                 entity.Property(e => e.Phone).HasMaxLength(15);
                 entity.Property(e => e.Address).HasMaxLength(500);
                 entity.HasIndex(e => e.Email).IsUnique();
+
+                // One-to-One relationship
+                entity.HasOne(u => u.Card)
+                      .WithOne(c => c.User)
+                      .HasForeignKey<MetroCard>(c => c.UserId)
+                      .IsRequired()
+                      .OnDelete(DeleteBehavior.Cascade);
             });
+
 
             // Configure Admin entity
             modelBuilder.Entity<Admin>(entity =>
@@ -56,17 +64,16 @@ namespace Metro_Ticket_Project.Infrastructure.Data
             modelBuilder.Entity<MetroCard>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.CardNo).IsRequired().HasMaxLength(16);
-                entity.Property(e => e.Balance).HasColumnType("decimal(10,2)").HasDefaultValue(0);
-                entity.Property(e => e.CardStatus).HasMaxLength(20).HasDefaultValue("Pending");
-                entity.HasIndex(e => e.CardNo).IsUnique();
 
-                // Foreign key to User
-                entity.HasOne(e => e.User)
-                      .WithMany()
-                      .HasForeignKey(e => e.UserId)
-                      .OnDelete(DeleteBehavior.Cascade);
+                entity.Property(e => e.CardNo).IsRequired().HasMaxLength(16);
+                entity.HasIndex(e => e.CardNo).IsUnique();
+                entity.Property(e => e.Balance).HasColumnType("decimal(10,2)").HasDefaultValue(0);
+                entity.Property(e => e.CardStatus).HasDefaultValue(false);
+                entity.Property(e => e.Pin);
+                entity.Property(e => e.ICard);
+                entity.Property(e => e.ICardNo).HasMaxLength(100);
             });
+
 
             // Configure Station entity
             modelBuilder.Entity<Station>(entity =>
@@ -311,15 +318,16 @@ namespace Metro_Ticket_Project.Infrastructure.Data
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 var createdDateProperty = entityType.FindProperty("CreatedDate");
+
                 if (createdDateProperty != null)
                 {
-                    createdDateProperty.SetDefaultValueSql("CURRENT_TIMESTAMP");
+                    createdDateProperty.SetDefaultValueSql("GETDATE()");
                 }
 
                 var updatedDateProperty = entityType.FindProperty("UpdatedDate");
                 if (updatedDateProperty != null)
                 {
-                    updatedDateProperty.SetDefaultValueSql("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
+                    updatedDateProperty.SetDefaultValueSql("GETDATE()");
                 }
             }
         }

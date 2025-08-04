@@ -4959,23 +4959,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sanke\\.nuget\\packages\\": {},
+    "C:\\Users\\HP\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sanke\\OneDrive\\Desktop\\Final_Project\\Solution1\\Metro_Ticket_Project\\Metro_Ticket_Project.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\C# project code\\updated 1\\CDAC_Final_Project\\Metro_Ticket_Project\\Metro_Ticket_Project.csproj",
       "projectName": "Metro_Ticket_Project",
-      "projectPath": "C:\\Users\\sanke\\OneDrive\\Desktop\\Final_Project\\Solution1\\Metro_Ticket_Project\\Metro_Ticket_Project.csproj",
-      "packagesPath": "C:\\Users\\sanke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sanke\\OneDrive\\Desktop\\Final_Project\\Solution1\\Metro_Ticket_Project\\obj\\",
+      "projectPath": "C:\\Users\\HP\\Desktop\\C# project code\\updated 1\\CDAC_Final_Project\\Metro_Ticket_Project\\Metro_Ticket_Project.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\C# project code\\updated 1\\CDAC_Final_Project\\Metro_Ticket_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\sanke\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4984,6 +4984,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

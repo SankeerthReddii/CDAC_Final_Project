@@ -1,4 +1,6 @@
+using Metro_Ticket_Project.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -33,9 +35,9 @@ namespace Metro_Ticket_Project
                 });
             });
 
-            // TODO: Add Entity Framework DbContext when you share your models
-            // builder.Services.AddDbContext<MetroDbContext>(options =>
-            //     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            // Add Entity Framework DbContext 
+            builder.Services.AddDbContext<MetroDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // TODO: Add your services here when converting them
             // builder.Services.AddScoped<IAuthService, AuthService>();

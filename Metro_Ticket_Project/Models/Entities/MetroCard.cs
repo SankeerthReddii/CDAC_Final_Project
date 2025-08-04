@@ -15,22 +15,22 @@ namespace Metro_Ticket_Project.Models.Entities
         public decimal Balance { get; set; } = 0;
 
         [Column("card_status")]
-        public bool CardStatus { get; set; } = false; // Changed to bool, false = Pending, true = Approved
+        public bool CardStatus { get; set; } = false;
 
+        // Foreign key property
         [Column("user_id")]
         public int UserId { get; set; }
 
-        // Navigation property
+        // Navigation property (required for EF Core)
         public virtual User User { get; set; } = null!;
 
+        [Column("pin")]
         public int Pin { get; set; }
 
-        public byte[]? ICard { get; internal set; }
-        public string ICardNo { get; internal set; }
+        [Column("icard")]
+        public byte[]? ICard { get; set; }
 
-        public static implicit operator bool(MetroCard v)
-        {
-            throw new NotImplementedException();
-        }
+        [Column("icard_no")]
+        public string ICardNo { get; set; } = string.Empty;
     }
 }
