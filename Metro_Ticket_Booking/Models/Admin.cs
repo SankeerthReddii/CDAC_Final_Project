@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Metro_Ticket_Booking.Models;
 
@@ -11,7 +10,8 @@ public partial class Admin
 
     public string Email { get; set; } = null!;
 
-    public String PasswordHash { get; set; } = null!;
+    public string PasswordHash { get; set; }
+    // Stored as Base64 string
 
     public DateTime? CreatedAt { get; set; }
 }

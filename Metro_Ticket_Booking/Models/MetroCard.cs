@@ -16,4 +16,5 @@ public partial class MetroCard
     public DateTime? ApprovedDate { get; set; }
 
     public virtual User User { get; set; } = null!;
+    public int Balance { get; internal set; }
 }

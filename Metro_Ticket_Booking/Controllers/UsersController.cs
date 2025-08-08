@@ -1,107 +1,97 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Metro_Ticket_Booking.DTOs;
 using Metro_Ticket_Booking.Models;
+using Metro_Ticket_Booking.Services;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Metro_Ticket_Booking.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    [Route("api/user")]
+    [Authorize(Roles = "user")]
+    public class UserController : ControllerBase
     {
-        private readonly MetroTicketContext _context;
+        private readonly IUserService _userService;
 
-        public UsersController(MetroTicketContext context)
+        public UserController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
-        // GET: api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        private int GetUserId()
         {
-            return await _context.Users.ToListAsync();
+            return int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("stations")]
+        public async Task<ActionResult<IEnumerable<Station>>> GetStations()
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
+            var stations = await _userService.GetAvailableStationsAsync();
+            return Ok(stations);
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpGet("routes")]
+        public async Task<ActionResult<IEnumerable<Models.Route>>> GetRoutes()
         {
-            if (id != user.UserId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var routes = await _userService.GetAvailableRoutesAsync();
+            return Ok(routes);
         }
 
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [HttpPost("tickets/book")]
+        public async Task<ActionResult<Ticket>> BookTicket([FromBody] TicketBookingDto bookingDto)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            bookingDto.UserId = GetUserId();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            var ticket = await _userService.BookTicketAsync(bookingDto);
+            return Ok(ticket);
         }
 
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpPost("metrocards/apply")]
+        public async Task<IActionResult> ApplyMetroCard([FromQuery] int bookingId, [FromQuery] int metroCardId)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var result = await _userService.ApplyMetroCardToBookingAsync(bookingId, metroCardId);
+            if (!result)
+                return BadRequest("Failed to apply metrocard.");
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok();
         }
 
-        private bool UserExists(int id)
+        [HttpPost("metrocards/recharge")]
+        public async Task<IActionResult> RechargeMetroCard([FromQuery] int metroCardId, [FromQuery] int amount)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            var result = await _userService.RechargeMetroCardAsync(metroCardId, amount);
+            if (!result)
+                return BadRequest("Failed to recharge metrocard.");
+
+            return Ok();
+        }
+
+        [HttpPost("complaints")]
+        public async Task<ActionResult<Complaint>> RaiseComplaint([FromBody] ComplaintCreateDto complaintDto)
+        {
+            complaintDto.UserId = GetUserId();
+
+            var complaint = await _userService.RaiseComplaintAsync(complaintDto);
+            return Ok(complaint);
+        }
+
+        [HttpGet("complaints")]
+        public async Task<ActionResult<IEnumerable<Complaint>>> GetComplaints()
+        {
+            var userId = GetUserId().ToString();
+            var complaints = await _userService.GetComplaintsByUserAsync(userId);
+            return Ok(complaints);
+        }
+
+        [HttpGet("bookings/history")]
+        public async Task<ActionResult<IEnumerable<BookingHistoryDto>>> GetBookingHistory()
+        {
+            var userId = GetUserId().ToString();
+            var bookings = await _userService.GetBookingsByUserAsync(userId);
+            return Ok(bookings);
         }
     }
 }

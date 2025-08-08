@@ -1,26 +1,10 @@
-﻿//using Metro_Ticket_Booking.DTOs;
-//using System.Threading.Tasks;
+﻿using Metro_Ticket_Booking.DTOs;
 
-//namespace Metro_Ticket_Booking.Services
-//{
-//    public interface IAuthService
-//    {
-//        Task<bool> RegisterUserAsync(RegisterUserDto dto);
-//        Task<AuthResponseDto> LoginUserAsync(LoginUserDto dto);
-//        Task<bool> RegisterAdminAsync(RegisterAdminDto dto);
-//        Task<AuthResponseDto> LoginAdminAsync(LoginAdminDto dto);
-//    }
-//}
-
-using Metro_Ticket_Booking.DTOs;
-
-namespace Metro_Ticket_Booking.Services
+namespace Metro_Ticket_Booking.Services;
+public interface IAuthService
 {
-    public interface IAuthService
-    {
-        Task<bool> RegisterUserAsync(RegisterUserDto dto);
-        Task<AuthResponseDto> LoginUserAsync(LoginUserDto dto);
-        Task<bool> RegisterAdminAsync(RegisterAdminDto dto);
-        Task<AuthResponseDto> LoginAdminAsync(LoginAdminDto dto);
-    }
+    Task<bool> RegisterUserAsync(RegisterUserDto dto);
+    Task<(AuthResponseDto user, string token)> LoginUserWithJwtAsync(LoginUserDto dto);
+    //Task<bool> RegisterAdminAsync(RegisterAdminDto dto);
+    Task<(AuthResponseDto admin, string token)> LoginAdminWithJwtAsync(LoginAdminDto dto);
 }

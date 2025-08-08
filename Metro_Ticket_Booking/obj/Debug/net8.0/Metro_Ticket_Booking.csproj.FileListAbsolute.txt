@@ -574,3 +574,6 @@ C:\Users\sanke\OneDrive\Desktop\new\Metro_backend_C#\Solution1\Metro_Ticket_Book
 C:\Users\sanke\OneDrive\Desktop\new\Metro_backend_C#\Solution1\Metro_Ticket_Booking\obj\Debug\net8.0\Metro_Ticket_Booking.pdb
 C:\Users\sanke\OneDrive\Desktop\new\Metro_backend_C#\Solution1\Metro_Ticket_Booking\obj\Debug\net8.0\Metro_Ticket_Booking.genruntimeconfig.cache
 C:\Users\sanke\OneDrive\Desktop\new\Metro_backend_C#\Solution1\Metro_Ticket_Booking\obj\Debug\net8.0\ref\Metro_Ticket_Booking.dll
+C:\Users\sanke\OneDrive\Desktop\Metro_backend_C#\Solution1\Metro_Ticket_Booking\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\sanke\OneDrive\Desktop\Metro_backend_C#\Solution1\Metro_Ticket_Booking\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\sanke\OneDrive\Desktop\Metro_backend_C#\Solution1\Metro_Ticket_Booking\bin\Debug\net8.0\Razorpay.dll

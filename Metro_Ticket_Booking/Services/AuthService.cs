@@ -1,247 +1,31 @@
-﻿////using Metro_Ticket_Booking.DTOs;
-////using Metro_Ticket_Booking.Models;
-////using Metro_Ticket_Booking.Services;
-////using Microsoft.EntityFrameworkCore;
-////using System.Security.Cryptography;
-////using System.Text;
-////using System.Threading.Tasks;
-
-////namespace Metro_Ticket_Booking.Services
-////{
-////    public class AuthService : IAuthService
-////    {
-////        private readonly MetroTicketContext _context;
-
-////        public AuthService(MetroTicketContext context)
-////        {
-////            _context = context;
-////        }
-
-////        // ----- USER REGISTRATION -----
-////        public async Task<bool> RegisterUserAsync(RegisterUserDto dto)
-////        {
-////            if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
-////                return false;
-
-////            var passwordHash = HashPassword(dto.Password);
-
-////            var user = new User
-////            {
-////                Name = dto.Name,
-////                Phone = dto.Phone,
-////                Dob = dto.DOB,
-////                Address = dto.Address,
-////                Gender = dto.Gender,
-////                Email = dto.Email,
-////                PasswordHash = passwordHash,
-////                LoyaltyPoints = 0,
-////                CreatedAt = DateTime.UtcNow
-////            };
-
-////            _context.Users.Add(user);
-////            await _context.SaveChangesAsync();
-////            return true;
-////        }
-
-////        // ----- USER LOGIN -----
-////        public async Task<string> LoginUserAsync(LoginUserDto dto)
-////        {
-////            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
-////            if (user == null || !VerifyPassword(dto.Password, user.PasswordHash))
-////                return null;
-
-////            return "User login successful"; // (Later, return JWT token here)
-////        }
-
-////        // ----- ADMIN REGISTRATION -----
-////        public async Task<bool> RegisterAdminAsync(RegisterAdminDto dto)
-////        {
-////            if (await _context.Admins.AnyAsync(a => a.Email == dto.Email))
-////                return false;
-
-////            var passwordHash = HashPassword(dto.Password);
-
-////            var admin = new Admin
-////            {
-////                Name = dto.Name,
-////                Email = dto.Email,
-////                PasswordHash = passwordHash,
-////                CreatedAt = DateTime.UtcNow
-////            };
-
-////            _context.Admins.Add(admin);
-////            await _context.SaveChangesAsync();
-////            return true;
-////        }
-
-////        // ----- ADMIN LOGIN -----
-////        public async Task<string> LoginAdminAsync(LoginAdminDto dto)
-////        {
-////            var admin = await _context.Admins.FirstOrDefaultAsync(a => a.Email == dto.Email);
-////            if (admin == null || !VerifyPassword(dto.Password, admin.PasswordHash))
-////                return null;
-
-////            return "Admin login successful"; // (Later, return JWT token here)
-////        }
-
-////        // ----- HELPER METHODS -----
-////        private byte[] HashPassword(string password)
-////        {
-////            using (SHA256 sha256 = SHA256.Create())
-////            {
-////                return sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-////            }
-////        }
-
-////        private bool VerifyPassword(string password, byte[] storedHash)
-////        {
-////            var hash = HashPassword(password);
-////            return hash.SequenceEqual(storedHash);
-////        }
-////    }
-////}
-
-
-//using Metro_Ticket_Booking.DTOs;
-//using Metro_Ticket_Booking.Models;
-//using Microsoft.EntityFrameworkCore;
-//using System.Security.Cryptography;
-//using System.Text;
-//using System.Threading.Tasks;
-
-//namespace Metro_Ticket_Booking.Services
-//{
-//    public class AuthService : IAuthService
-//    {
-//        private readonly MetroTicketContext _context;
-
-//        public AuthService(MetroTicketContext context)
-//        {
-//            _context = context;
-//        }
-
-//        // ----- USER REGISTRATION -----
-//        public async Task<bool> RegisterUserAsync(RegisterUserDto dto)
-//        {
-//            if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
-//                return false;
-
-//            var passwordHash = HashPassword(dto.Password);
-
-//            var user = new User
-//            {
-//                Name = dto.Name,
-//                Phone = dto.Phone,
-//                Dob = dto.Dob,
-//                Address = dto.Address,
-//                Gender = dto.Gender,
-//                Email = dto.Email,
-//                PasswordHash = passwordHash,
-//                LoyaltyPoints = 0,
-//                CreatedAt = DateTime.UtcNow
-//            };
-
-//            _context.Users.Add(user);
-//            await _context.SaveChangesAsync();
-//            return true;
-//        }
-
-//        // ----- USER LOGIN -----
-//        public async Task<AuthResponseDto> LoginUserAsync(LoginUserDto dto)
-//        {
-//            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
-//            if (user == null || !VerifyPassword(dto.Password, user.PasswordHash))
-//                return null;
-
-//            return new AuthResponseDto
-//            {
-//                Id = user.UserId.ToString(),
-//                Name = user.Name,
-//                Email = user.Email,
-//                Role = "user"
-//            };
-//        }
-
-//        // ----- ADMIN REGISTRATION -----
-//        public async Task<bool> RegisterAdminAsync(RegisterAdminDto dto)
-//        {
-//            if (await _context.Admins.AnyAsync(a => a.Email == dto.Email))
-//                return false;
-
-//            var passwordHash = HashPassword(dto.Password);
-
-//            var admin = new Admin
-//            {
-//                Name = dto.Name,
-//                Email = dto.Email,
-//                PasswordHash = passwordHash,
-//                CreatedAt = DateTime.UtcNow
-//            };
-
-//            _context.Admins.Add(admin);
-//            await _context.SaveChangesAsync();
-//            return true;
-//        }
-
-//        // ----- ADMIN LOGIN -----
-//        public async Task<AuthResponseDto> LoginAdminAsync(LoginAdminDto dto)
-//        {
-//            var admin = await _context.Admins.FirstOrDefaultAsync(a => a.Email == dto.Email);
-//            if (admin == null || !VerifyPassword(dto.Password, admin.PasswordHash))
-//                return null;
-
-//            return new AuthResponseDto
-//            {
-//                Id = admin.AdminId.ToString(),
-//                Name = admin.Name,
-//                Email = admin.Email,
-//                Role = "admin"
-//            };
-//        }
-
-//        // ----- HELPER METHODS -----
-//        private byte[] HashPassword(string password)
-//        {
-//            using (SHA256 sha256 = SHA256.Create())
-//            {
-//                return sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-//            }
-//        }
-
-//        private bool VerifyPassword(string password, byte[] storedHash)
-//        {
-//            var hash = HashPassword(password);
-//            return hash.SequenceEqual(storedHash);
-//        }
-//    }
-//}
-
-
-
-
-
-
-// AuthService.cs
-using Microsoft.EntityFrameworkCore;
-using Metro_Ticket_Booking.DTOs;
+﻿using Metro_Ticket_Booking.DTOs;
 using Metro_Ticket_Booking.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Metro_Ticket_Booking.Services
 {
     public class AuthService : IAuthService
     {
         private readonly MetroTicketContext _context;
+        private readonly IConfiguration _configuration;
 
-        public AuthService(MetroTicketContext context)
+        public AuthService(MetroTicketContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
+        // Register user with hashed password as Base64 string
         public async Task<bool> RegisterUserAsync(RegisterUserDto dto)
         {
-            // Check if user already exists
             if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
                 return false;
 
@@ -263,68 +47,102 @@ namespace Metro_Ticket_Booking.Services
             return true;
         }
 
-        public async Task<AuthResponseDto> LoginUserAsync(LoginUserDto dto)
+        // Login user and generate JWT
+        public async Task<(AuthResponseDto, string)> LoginUserWithJwtAsync(LoginUserDto dto)
         {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == dto.Email);
-
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
             if (user == null || !VerifyPassword(dto.Password, user.PasswordHash))
-                return null;
+                return (null, null);
 
-            return new AuthResponseDto
+            var userDto = new AuthResponseDto
             {
                 Id = user.UserId.ToString(),
                 Name = user.Name,
                 Email = user.Email,
                 Role = "user"
             };
+
+            var token = GenerateJwtToken(userDto);
+            return (userDto, token);
         }
 
-        public async Task<bool> RegisterAdminAsync(RegisterAdminDto dto)
+        // Login admin and generate JWT
+        public async Task<(AuthResponseDto, string)> LoginAdminWithJwtAsync(LoginAdminDto dto)
         {
-            if (await _context.Admins.AnyAsync(a => a.Email == dto.Email))
-                return false;
+            var admin = await _context.Admins.FirstOrDefaultAsync(a => a.Email == dto.Email);
 
-            var admin = new Admin
-            {
-                Name = dto.Name,
-                Email = dto.Email,
-                PasswordHash = HashPassword(dto.Password),
-                CreatedAt = DateTime.UtcNow
-            };
+            if (admin == null)
+                return (null, null);
 
-            _context.Admins.Add(admin);
-            await _context.SaveChangesAsync();
-            return true;
-        }
+            string hashedInputPassword = HashPassword(dto.Password);
 
-        public async Task<AuthResponseDto> LoginAdminAsync(LoginAdminDto dto)
-        {
-            var admin = await _context.Admins
-                .FirstOrDefaultAsync(a => a.Email == dto.Email);
+            if (!string.Equals(admin.PasswordHash, hashedInputPassword))
+                return (null, null);
 
-            if (admin == null || !VerifyPassword(dto.Password, admin.PasswordHash))
-                return null;
-
-            return new AuthResponseDto
+            var adminDto = new AuthResponseDto
             {
                 Id = admin.AdminId.ToString(),
                 Name = admin.Name,
                 Email = admin.Email,
                 Role = "admin"
             };
+
+            var token = GenerateJwtToken(adminDto);
+            return (adminDto, token);
         }
 
+
+        // Example hashing function (modify according to your hashing approach)
         private string HashPassword(string password)
         {
             using var sha256 = SHA256.Create();
-            var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-            return Convert.ToBase64String(hashedBytes);
+            var bytes = Encoding.UTF8.GetBytes(password);
+            var hash = sha256.ComputeHash(bytes);
+            string hex = BitConverter.ToString(hash).Replace("-", "").ToLower();
+            byte[] hexBytes = Encoding.UTF8.GetBytes(hex);
+            return Convert.ToBase64String(hexBytes);
         }
 
-        private bool VerifyPassword(string password, string hashedPassword)
+
+
+
+        // Verify password by comparing Base64 strings
+        private bool VerifyPassword(string password, string storedHashedPassword)
         {
-            return HashPassword(password) == hashedPassword;
+            var hashOfInput = HashPassword(password);
+            return hashOfInput == storedHashedPassword;
+        }
+
+        // Generate JWT token
+        private string GenerateJwtToken(AuthResponseDto dto)
+        {
+            var jwtSettings = _configuration.GetSection("JwtSettings");
+            var secretKey = jwtSettings["SecretKey"];
+            var issuer = jwtSettings["Issuer"];
+            var audience = jwtSettings["Audience"];
+            var expiryMinutes = int.Parse(jwtSettings["ExpiryMinutes"]);
+
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, dto.Id),
+                new Claim(JwtRegisteredClaimNames.Name, dto.Name),
+                new Claim(JwtRegisteredClaimNames.Email, dto.Email),
+                new Claim(ClaimTypes.Role, dto.Role),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(expiryMinutes),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

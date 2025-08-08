@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Metro_Ticket_Booking.DTOs; // Assuming DTOs are defined accordingly
+using Metro_Ticket_Booking.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Metro_Ticket_Booking.Models;
-using Metro_Ticket_Booking.DTOs; // Assuming DTOs are defined accordingly
 
 namespace Metro_Ticket_Booking.Controllers
 {
@@ -92,7 +92,7 @@ namespace Metro_Ticket_Booking.Controllers
                 var complaint = new Complaint
                 {
                     UserId = dto.UserId,
-                    Message = dto.Subject,
+                    Message = dto.Description,
                     SubmittedAt = DateTime.UtcNow
                     // Reply and RepliedAt are null by default
                 };

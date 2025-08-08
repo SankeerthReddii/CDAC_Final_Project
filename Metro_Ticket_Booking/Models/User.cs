@@ -19,7 +19,7 @@ public partial class User
 
     public string Email { get; set; } = null!;
 
-    public String PasswordHash { get; set; } = null!;
+    public string PasswordHash { get; set; } = null!; // Stored as Base64 string
 
     public int? LoyaltyPoints { get; set; }
 

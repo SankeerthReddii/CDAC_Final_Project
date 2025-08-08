@@ -34,4 +34,5 @@ public partial class Ticket
     public virtual Station ToStation { get; set; } = null!;
 
     public virtual User User { get; set; } = null!;
+    public DateTime TravelDate { get; internal set; }
 }

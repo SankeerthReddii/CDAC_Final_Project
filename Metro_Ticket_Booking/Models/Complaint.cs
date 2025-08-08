@@ -13,6 +13,8 @@ public partial class Complaint
 
     public string? Reply { get; set; }
 
+    public string? Status { get; set; }
+
     public DateTime SubmittedAt { get; set; }
 
     public DateTime? RepliedAt { get; set; }
