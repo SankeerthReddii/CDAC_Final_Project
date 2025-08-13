@@ -1,0 +1,309 @@
+[
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.AdminController",
+    "Method": "FetchAllData",
+    "RelativePath": "api/Admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.AdminController",
+    "Method": "DisplayComplaints",
+    "RelativePath": "api/Admin/complaints",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.AdminController",
+    "Method": "IssueCard",
+    "RelativePath": "api/Admin/issueCard/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.AdminController",
+    "Method": "IssueCards",
+    "RelativePath": "api/Admin/issueCards",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.AdminController",
+    "Method": "ReplyToComplaint",
+    "RelativePath": "api/Admin/replyToComplaint/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "msgString",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Complaint.ReplyToComplaint",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.AdminController",
+    "Method": "SignIn",
+    "RelativePath": "api/Admin/sign_in",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Auth.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.UserController",
+    "Method": "SignIn",
+    "RelativePath": "api/sign_in",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Auth.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.UserController",
+    "Method": "SignUp",
+    "RelativePath": "api/sign_up",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerRequest",
+        "Type": "Metro_Ticket_Project.Models.DTOs.User.RegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.BookingController",
+    "Method": "BookTicket",
+    "RelativePath": "api/user/book_ticket/journey_planner",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Ticket.TicketRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.BookingController",
+    "Method": "CreateOrder",
+    "RelativePath": "api/user/book_ticket/orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.ComplaintController",
+    "Method": "DisplayAllComplaintsByEmail",
+    "RelativePath": "api/user/complaints",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.User.UserEmailRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.ComplaintController",
+    "Method": "RegisterComplaint",
+    "RelativePath": "api/user/complaints/register_complaint",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaint",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Complaint.ComplaintRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.FareAndScheduleController",
+    "Method": "GetFareFromStation",
+    "RelativePath": "api/user/fare_and_schedule/fare/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.FareAndScheduleController",
+    "Method": "GetSchedule",
+    "RelativePath": "api/user/fare_and_schedule/schedule/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.UserHistoryController",
+    "Method": "DisplayTransactionHistory",
+    "RelativePath": "api/user/history/display",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.User.UserEmailRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.UserHistoryController",
+    "Method": "TransactionHistory",
+    "RelativePath": "api/user/history/save",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Transaction.TransactionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.MetroCardController",
+    "Method": "CheckBalance",
+    "RelativePath": "api/user/metro_card/card",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.User.UserEmailRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.MetroCardController",
+    "Method": "CardAuthenticate",
+    "RelativePath": "api/user/metro_card/card_authenticate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Card.RechargeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.MetroCardController",
+    "Method": "CardRecharge",
+    "RelativePath": "api/user/metro_card/card_recharge",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Card.RechargeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Metro_Ticket_Project.Controllers.MetroCardController",
+    "Method": "RequestForMetroCard",
+    "RelativePath": "api/user/metro_card/request_card",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Metro_Ticket_Project.Models.DTOs.Card.MetroCardRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
