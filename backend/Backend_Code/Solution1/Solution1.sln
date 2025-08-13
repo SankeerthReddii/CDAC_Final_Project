@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metro_Ticket_Booking", "..\..\MetroOne\MetroOne\Metro_Ticket_Booking\Metro_Ticket_Booking\Metro_Ticket_Booking.csproj", "{BA75336B-C20F-D172-3CFA-84698A80A103}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA75336B-C20F-D172-3CFA-84698A80A103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA75336B-C20F-D172-3CFA-84698A80A103}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA75336B-C20F-D172-3CFA-84698A80A103}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA75336B-C20F-D172-3CFA-84698A80A103}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3312E182-6DA1-4037-8E83-3340D5E1FEC6}
+	EndGlobalSection
+EndGlobal
